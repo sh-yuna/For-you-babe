@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Babe ♡</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html,body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:#08080d;
+  color:white;
+  font-family:Georgia,serif;
+}
+
+body{
+  position:relative;
+}
+
+/* Background glow */
+body::before{
+  content:"";
+  position:fixed;
+  inset:-40%;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(255,180,205,.14),transparent 25%),
+    radial-gradient(circle at 80% 70%,rgba(170,160,255,.10),transparent 28%);
+  animation:bgMove 12s ease-in-out infinite alternate;
+}
+
+@keyframes bgMove{
+  from{transform:scale(1)}
+  to{transform:scale(1.15) rotate(3deg)}
+}
+
+/* ---------- PASSWORD ---------- */
+
+#lock{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:25px;
+  background:#08080d;
+}
+
+.lock-box{
+  width:min(380px,100%);
+  text-align:center;
+  padding:42px 28px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:30px;
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(20px);
+  box-shadow:0 30px 80px rgba(0,0,0,.55);
+}
+
+.lock-icon{
+  font-size:38px;
+  margin-bottom:20px;
+}
+
+.lock-box h1{
+  font-size:32px;
+  font-weight:400;
+  margin-bottom:12px;
+}
+
+.lock-box p{
+  font-family:Arial,sans-serif;
+  color:rgba(255,255,255,.55);
+  font-size:13px;
+  margin-bottom:25px;
+}
+
+input{
+  width:100%;
+  padding:15px;
+  border-radius:50px;
+  border:1px solid rgba(255,255,255,.15);
+  background:rgba(255,255,255,.06);
+  color:white;
+  text-align:center;
+  outline:none;
+  font-size:18px;
+  letter-spacing:7px;
+}
+
+input::placeholder{
+  letter-spacing:2px;
+  color:rgba(255,255,255,.3);
+}
+
+.open-btn,
+.next-btn{
+  margin-top:18px;
+  padding:14px 27px;
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:50px;
+  background:rgba(255,255,255,.07);
+  color:white;
+  cursor:pointer;
+  font-family:Arial,sans-serif;
+  font-size:11px;
+  letter-spacing:2px;
+  transition:.3s;
+}
+
+.open-btn:hover,
+.next-btn:hover{
+  background:white;
+  color:#111;
+  transform:translateY(-2px);
+}
+
+#error{
+  height:18px;
+  margin-top:12px;
+  color:#ff9fb7;
+  font:12px Arial,sans-serif;
+}
+
+/* ---------- PAGES ---------- */
+
+.page{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:25px;
+  opacity:0;
+  visibility:hidden;
+  transform:scale(1.08) translateY(25px);
+  transition:
+    opacity .75s ease,
+    transform .9s cubic-bezier(.22,.61,.36,1),
+    visibility .75s;
+  z-index:1;
+}
+
+.page.active{
+  opacity:1;
+  visibility:visible;
+  transform:scale(1) translateY(0);
+  z-index:5;
+}
+
+.content{
+  width:min(850px,100%);
+  text-align:center;
+  position:relative;
+}
+
+/* ---------- TEXT ---------- */
+
+.eyebrow{
+  font:10px Arial,sans-serif;
+  letter-spacing:5px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.48);
+  margin-bottom:20px;
+}
+
+h1{
+  font-size:clamp(45px,11vw,95px);
+  font-weight:400;
+  line-height:.95;
+  letter-spacing:-4px;
+}
+
+h2{
+  font-size:clamp(30px,7vw,58px);
+  font-weight:400;
+  line-height:1.05;
+  margin-bottom:18px;
+}
+
+p{
+  font:14px/1.8 Arial,sans-serif;
+  color:rgba(255,255,255,.62);
+}
+
+/* ---------- 3D ORB ---------- */
+
+.orb{
+  width:155px;
+  height:155px;
+  margin:0 auto 38px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 30% 25%,
+      #ffffff 0%,
+      #ffdce7 9%,
+      #c97996 28%,
+      #573847 55%,
+      #121117 78%);
+  box-shadow:
+    inset -25px -30px 45px rgba(0,0,0,.6),
+    inset 15px 12px 25px rgba(255,255,255,.3),
+    0 30px 70px rgba(0,0,0,.6);
+  animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0) rotate(0)}
+  50%{transform:translateY(-13px) rotate(4deg)}
+}
+
+/* ---------- PAGE 2 ---------- */
+
+.spark{
+  font-size:55px;
+  margin-bottom:15px;
+  animation:float 3s ease-in-out infinite;
+}
+
+.gradient-title{
+  background:linear-gradient(
+    120deg,#fff,#ffd6e4,#fff,#cfc8ff
+  );
+  background-size:300%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation:shine 6s linear infinite;
+}
+
+@keyframes shine{
+  to{background-position:300% center}
+}
+
+/* ---------- PHOTO ---------- */
+
+.photo-frame{
+  width:min(300px,78vw);
+  aspect-ratio:4/5;
+  margin:0 auto 25px;
+  padding:8px;
+  border-radius:24px;
+  background:linear-gradient(
+    145deg,
+    rgba(255,255,255,.35),
+    rgba(255,255,255,.04)
+  );
+  box-shadow:
+    0 35px 80px rgba(0,0,0,.65),
+    0 0 50px rgba(255,180,205,.08);
+  transform:perspective(900px) rotateY(-6deg);
+  animation:photoFloat 5s ease-in-out infinite;
+}
+
+.photo-inner{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  border-radius:17px;
+  background:#15151b;
+}
+
+.photo-inner img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+@keyframes photoFloat{
+  0%,100%{
+    transform:perspective(900px) rotateY(-6deg) translateY(0);
+  }
+  50%{
+    transform:perspective(900px) rotateY(6deg) translateY(-9px);
+  }
+}
+
+/* ---------- CAKE ---------- */
+
+.cake-area{
+  height:270px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  margin-bottom:15px;
+}
+
+.cake{
+  position:relative;
+  width:190px;
+  height:125px;
+  filter:drop-shadow(0 25px 30px rgba(0,0,0,.6));
+}
+
+.cake-base{
+  position:absolute;
+  bottom:0;
+  width:190px;
+  height:90px;
+  border-radius:18px 18px 25px 25px;
+  background:linear-gradient(
+    90deg,#633447,#c27791,#69374b
+  );
+  box-shadow:
+    inset 0 8px 12px rgba(255,255,255,.16),
+    inset 0 -15px 20px rgba(0,0,0,.25);
+}
+
+.cake-top{
+  position:absolute;
+  top:20px;
+  width:190px;
+  height:43px;
+  border-radius:50%;
+  background:linear-gradient(
+    120deg,#ffdce7,#fff2f6,#c98ca2
+  );
+}
+
+.candle{
+  position:absolute;
+  left:50%;
+  top:-38px;
+  transform:translateX(-50%);
+  width:13px;
+  height:60px;
+  border-radius:8px;
+  background:repeating-linear-gradient(
+    -45deg,
+    #fff 0 7px,
+    #d78ba2 7px 14px
+  );
+  z-index:2;
+}
+
+.flame{
+  position:absolute;
+  width:20px;
+  height:29px;
+  left:50%;
+  top:-27px;
+  transform:translateX(-50%);
+  border-radius:50%;
+  background:radial-gradient(
+    ellipse at bottom,
+    #fff5aa 0 20%,
+    #ffc34d 35%,
+    #ff704d 70%,
+    transparent 72%
+  );
+  animation:flicker .55s ease-in-out infinite alternate;
+}
+
+@keyframes flicker{
+  from{
+    transform:translateX(-50%) scale(.9) rotate(-4deg);
+  }
+  to{
+    transform:translateX(-50%) scale(1.12) rotate(4deg);
+  }
+}
+
+/* ---------- FINAL ---------- */
+
+.final-box{
+  padding:40px 25px;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:30px;
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(18px);
+  box-shadow:0 30px 80px rgba(0,0,0,.5);
+}
+
+.final-heart{
+  font-size:50px;
+  margin-bottom:20px;
+  animation:float 3s ease-in-out infinite;
+}
+
+/* ---------- MOBILE ---------- */
+
+@media(max-width:600px){
+
+  .orb{
+    width:130px;
+    height:130px;
+  }
+
+  .cake-area{
+    height:245px;
+  }
+
+  .final-box{
+    padding:32px 20px;
+  }
+
+  h1{
+    letter-spacing:-2px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD -->
+<div id="lock">
+
+  <div class="lock-box">
+
+    <div class="lock-icon">✦</div>
+
+    <h1>A little secret...</h1>
+
+    <p>Only someone special knows the password.</p>
+
+    <input
+      id="password"
+      type="password"
+      inputmode="numeric"
+      maxlength="4"
+      placeholder="PASSWORD"
+    >
+
+    <button class="open-btn" onclick="unlock()">
+      OPEN →
+    </button>
+
+    <div id="error"></div>
+
+  </div>
+
+</div>
+
+
+<!-- PAGE 1 -->
+<section class="page active">
+
+  <div class="content">
+
+    <div class="eyebrow">A tiny surprise</div>
+
+    <div class="orb"></div>
+
+    <h2>A little surprise<br>for you...</h2>
+
+    <p>
+      Take a moment.<br>
+      Something is waiting for you.
+    </p>
+
+    <button class="next-btn" onclick="nextPage()">
+      OPEN THE SURPRISE →
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- PAGE 2 -->
+<section class="page">
+
+  <div class="content">
+
+    <div class="spark">✦</div>
+
+    <div class="eyebrow">Made with lots of love</div>
+
+    <h1 class="gradient-title">For My Babe</h1>
+
+    <p>
+      For all the random laughs,<br>
+      crazy conversations and unforgettable moments.
+    </p>
+
+    <button class="next-btn" onclick="nextPage()">
+      NEXT →
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- PAGE 3 -->
+<section class="page">
+
+  <div class="content">
+
+    <div class="eyebrow">One special memory</div>
+
+    <div class="photo-frame">
+
+      <div class="photo-inner">
+
+        <img
+          src="photo.jpg"
+          alt="Special memory"
+          onerror="this.alt='Photo not found';"
+        >
+
+      </div>
+
+    </div>
+
+    <p>
+      One picture.<br>
+      A whole bunch of memories.
+    </p>
+
+    <button class="next-btn" onclick="nextPage()">
+      NEXT →
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- PAGE 4 -->
+<section class="page">
+
+  <div class="content">
+
+    <div class="eyebrow">Birthday time</div>
+
+    <div class="cake-area">
+
+      <div class="cake">
+
+        <div class="candle">
+          <div class="flame"></div>
+        </div>
+
+        <div class="cake-top"></div>
+
+        <div class="cake-base"></div>
+
+      </div>
+
+    </div>
+
+    <h2>Make a wish ✨</h2>
+
+    <p>
+      Another year.<br>
+      Another chapter full of memories.
+    </p>
+
+    <button class="next-btn" onclick="nextPage()">
+      ONE LAST THING →
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- PAGE 5 -->
+<section class="page">
+
+  <div class="content">
+
+    <div class="final-box">
+
+      <div class="final-heart">♡</div>
+
+      <div class="eyebrow">For you, Harshini</div>
+
+      <h2>
+        Happy Birthday,<br>
+        Harshini!
+      </h2>
+
+      <p>
+        I hope this year gives you<br>
+        countless reasons to smile,<br>
+        beautiful memories to keep,<br>
+        and plenty of crazy moments to laugh about.<br><br>
+
+        Stay happy, stay crazy,<br>
+        and keep being the amazing friend you are. ♡
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<script>
+
+let currentPage = 0;
+let unlocked = false;
+
+const pages = document.querySelectorAll(".page");
+
+function unlock(){
+
+  const password =
+    document.getElementById("password").value;
+
+  const error =
+    document.getElementById("error");
+
+  if(password === "2709"){
+
+    unlocked = true;
+
+    document.getElementById("lock").style.display="none";
+
+    showPage(0);
+
+  }else{
+
+    error.textContent="Wrong password. Try again ♡";
+
+  }
+
+}
+
+function showPage(index){
+
+  if(!unlocked) return;
+
+  if(index < 0 || index >= pages.length) return;
+
+  pages.forEach((page,i)=>{
+
+    page.classList.toggle(
+      "active",
+      i === index
+    );
+
+  });
+
+  currentPage = index;
+
+}
+
+function nextPage(){
+
+  if(currentPage < pages.length - 1){
+
+    showPage(currentPage + 1);
+
+  }
+
+}
+
+
+/* Enter key = unlock */
+
+document
+  .getElementById("password")
+  .addEventListener("keydown",(event)=>{
+
+    if(event.key === "Enter"){
+
+      unlock();
+
+    }
+
+  });
+
+
+/* Swipe left/right */
+
+let startX = 0;
+let startY = 0;
+
+document.addEventListener(
+  "touchstart",
+  (event)=>{
+
+    startX =
+      event.changedTouches[0].screenX;
+
+    startY =
+      event.changedTouches[0].screenY;
+
+  },
+  {passive:true}
+);
+
+document.addEventListener(
+  "touchend",
+  (event)=>{
+
+    if(!unlocked) return;
+
+    const endX =
+      event.changedTouches[0].screenX;
+
+    const endY =
+      event.changedTouches[0].screenY;
+
+    const diffX = endX - startX;
+    const diffY = endY - startY;
+
+    if(
+      Math.abs(diffX) > 60 &&
+      Math.abs(diffX) > Math.abs(diffY)
+    ){
+
+      if(diffX < 0){
+
+        nextPage();
+
+      }else if(
+        diffX > 0 &&
+        currentPage > 0
+      ){
+
+        showPage(currentPage - 1);
+
+      }
+
+    }
+
+  },
+  {passive:true}
+);
+
+</script>
+
+</body>
+</html>
