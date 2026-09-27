@@ -16,8 +16,8 @@ html,body{
   width:100%;
   height:100%;
   overflow:hidden;
-  background:#08080d;
-  color:white;
+  background:#f4eee4;
+  color:#4a4037;
   font-family:Georgia,serif;
 }
 
@@ -25,24 +25,81 @@ body{
   position:relative;
 }
 
-/* Background glow */
+/* PREMIUM BACKGROUND */
 body::before{
   content:"";
   position:fixed;
-  inset:-40%;
+  inset:-30%;
   background:
-    radial-gradient(circle at 20% 20%,rgba(255,180,205,.14),transparent 25%),
-    radial-gradient(circle at 80% 70%,rgba(170,160,255,.10),transparent 28%);
-  animation:bgMove 12s ease-in-out infinite alternate;
+    radial-gradient(circle at 15% 20%,rgba(255,255,255,.95),transparent 25%),
+    radial-gradient(circle at 85% 75%,rgba(220,198,170,.45),transparent 28%),
+    radial-gradient(circle at 50% 50%,rgba(255,255,255,.7),transparent 35%);
+  animation:bgMove 14s ease-in-out infinite alternate;
 }
 
 @keyframes bgMove{
   from{transform:scale(1)}
-  to{transform:scale(1.15) rotate(3deg)}
+  to{transform:scale(1.12) rotate(2deg)}
 }
 
-/* ---------- PASSWORD ---------- */
+/* FLOATING DECORATIONS */
+.decor{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:0;
+}
 
+.star,.gem,.choco{
+  position:absolute;
+  opacity:.55;
+  animation:floatDecor 7s ease-in-out infinite;
+}
+
+.star{
+  color:#b69b75;
+  font-size:18px;
+}
+
+.gem{
+  width:18px;
+  height:18px;
+  transform:rotate(45deg);
+  border:1px solid rgba(140,115,80,.35);
+  background:linear-gradient(135deg,#fff,#d8c6aa,#fff);
+  box-shadow:0 5px 15px rgba(100,80,50,.12);
+}
+
+.choco{
+  width:22px;
+  height:16px;
+  border-radius:4px;
+  background:linear-gradient(135deg,#765544,#b58b6e);
+  box-shadow:inset 3px 3px 5px rgba(255,255,255,.2);
+}
+
+.star:nth-child(1){top:12%;left:10%;animation-delay:0s}
+.star:nth-child(2){top:22%;right:12%;animation-delay:2s}
+.star:nth-child(3){bottom:18%;left:15%;animation-delay:4s}
+.star:nth-child(4){bottom:25%;right:10%;animation-delay:1s}
+
+.gem:nth-child(5){top:35%;left:7%;animation-delay:2s}
+.gem:nth-child(6){top:65%;right:8%;animation-delay:5s}
+
+.choco:nth-child(7){top:14%;right:22%;animation-delay:3s}
+.choco:nth-child(8){bottom:15%;left:25%;animation-delay:1s}
+
+@keyframes floatDecor{
+  0%,100%{
+    transform:translateY(0) rotate(0);
+  }
+  50%{
+    transform:translateY(-16px) rotate(8deg);
+  }
+}
+
+/* PASSWORD */
 #lock{
   position:fixed;
   inset:0;
@@ -51,34 +108,38 @@ body::before{
   align-items:center;
   justify-content:center;
   padding:25px;
-  background:#08080d;
+  background:#f4eee4;
 }
 
 .lock-box{
-  width:min(380px,100%);
+  width:min(390px,100%);
   text-align:center;
-  padding:42px 28px;
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:30px;
-  background:rgba(255,255,255,.04);
-  backdrop-filter:blur(20px);
-  box-shadow:0 30px 80px rgba(0,0,0,.55);
+  padding:45px 28px;
+  border:1px solid rgba(130,105,75,.18);
+  border-radius:32px;
+  background:rgba(255,255,255,.68);
+  backdrop-filter:blur(25px);
+  box-shadow:
+    0 30px 80px rgba(90,70,45,.18),
+    inset 0 1px 0 rgba(255,255,255,.9);
 }
 
 .lock-icon{
   font-size:38px;
+  color:#ad8d65;
   margin-bottom:20px;
 }
 
 .lock-box h1{
   font-size:32px;
   font-weight:400;
+  color:#40372f;
   margin-bottom:12px;
 }
 
 .lock-box p{
   font-family:Arial,sans-serif;
-  color:rgba(255,255,255,.55);
+  color:#897b6c;
   font-size:13px;
   margin-bottom:25px;
 }
@@ -87,9 +148,9 @@ input{
   width:100%;
   padding:15px;
   border-radius:50px;
-  border:1px solid rgba(255,255,255,.15);
-  background:rgba(255,255,255,.06);
-  color:white;
+  border:1px solid rgba(130,105,75,.2);
+  background:rgba(255,255,255,.75);
+  color:#4a4037;
   text-align:center;
   outline:none;
   font-size:18px;
@@ -98,40 +159,38 @@ input{
 
 input::placeholder{
   letter-spacing:2px;
-  color:rgba(255,255,255,.3);
+  color:#b5a99c;
 }
 
-.open-btn,
-.next-btn{
+.open-btn,.next-btn{
   margin-top:18px;
   padding:14px 27px;
-  border:1px solid rgba(255,255,255,.22);
+  border:1px solid rgba(130,105,75,.25);
   border-radius:50px;
-  background:rgba(255,255,255,.07);
-  color:white;
+  background:rgba(255,255,255,.7);
+  color:#665747;
   cursor:pointer;
   font-family:Arial,sans-serif;
   font-size:11px;
   letter-spacing:2px;
   transition:.3s;
+  box-shadow:0 8px 20px rgba(90,70,45,.08);
 }
 
-.open-btn:hover,
-.next-btn:hover{
-  background:white;
-  color:#111;
+.open-btn:hover,.next-btn:hover{
+  background:#4a4037;
+  color:white;
   transform:translateY(-2px);
 }
 
 #error{
   height:18px;
   margin-top:12px;
-  color:#ff9fb7;
+  color:#a66f6f;
   font:12px Arial,sans-serif;
 }
 
-/* ---------- PAGES ---------- */
-
+/* PAGES */
 .page{
   position:absolute;
   inset:0;
@@ -162,13 +221,11 @@ input::placeholder{
   position:relative;
 }
 
-/* ---------- TEXT ---------- */
-
 .eyebrow{
   font:10px Arial,sans-serif;
   letter-spacing:5px;
   text-transform:uppercase;
-  color:rgba(255,255,255,.48);
+  color:#a08d77;
   margin-bottom:20px;
 }
 
@@ -184,31 +241,26 @@ h2{
   font-weight:400;
   line-height:1.05;
   margin-bottom:18px;
+  color:#4a4037;
 }
 
 p{
   font:14px/1.8 Arial,sans-serif;
-  color:rgba(255,255,255,.62);
+  color:#897b6c;
 }
 
-/* ---------- 3D ORB ---------- */
-
+/* 3D ORB */
 .orb{
   width:155px;
   height:155px;
   margin:0 auto 38px;
   border-radius:50%;
   background:
-    radial-gradient(circle at 30% 25%,
-      #ffffff 0%,
-      #ffdce7 9%,
-      #c97996 28%,
-      #573847 55%,
-      #121117 78%);
+    radial-gradient(circle at 30% 22%,#fff 0%,#f8eee1 12%,#d8c2a5 30%,#a88966 52%,#51473e 78%);
   box-shadow:
-    inset -25px -30px 45px rgba(0,0,0,.6),
-    inset 15px 12px 25px rgba(255,255,255,.3),
-    0 30px 70px rgba(0,0,0,.6);
+    inset -25px -30px 45px rgba(60,45,30,.35),
+    inset 15px 12px 25px rgba(255,255,255,.75),
+    0 30px 70px rgba(90,70,45,.22);
   animation:float 4s ease-in-out infinite;
 }
 
@@ -217,17 +269,21 @@ p{
   50%{transform:translateY(-13px) rotate(4deg)}
 }
 
-/* ---------- PAGE 2 ---------- */
-
 .spark{
   font-size:55px;
+  color:#ad8d65;
   margin-bottom:15px;
   animation:float 3s ease-in-out infinite;
 }
 
 .gradient-title{
   background:linear-gradient(
-    120deg,#fff,#ffd6e4,#fff,#cfc8ff
+    120deg,
+    #40372f,
+    #a88b69,
+    #5b4d40,
+    #c4ab87,
+    #40372f
   );
   background-size:300%;
   -webkit-background-clip:text;
@@ -240,22 +296,23 @@ p{
   to{background-position:300% center}
 }
 
-/* ---------- PHOTO ---------- */
-
+/* PHOTO */
 .photo-frame{
   width:min(300px,78vw);
   aspect-ratio:4/5;
   margin:0 auto 25px;
-  padding:8px;
-  border-radius:24px;
+  padding:9px;
+  border-radius:25px;
   background:linear-gradient(
     145deg,
-    rgba(255,255,255,.35),
-    rgba(255,255,255,.04)
+    #fff,
+    #d5c2a7,
+    #fff,
+    #b59a76
   );
   box-shadow:
-    0 35px 80px rgba(0,0,0,.65),
-    0 0 50px rgba(255,180,205,.08);
+    0 35px 80px rgba(80,60,40,.25),
+    0 0 50px rgba(190,160,120,.15);
   transform:perspective(900px) rotateY(-6deg);
   animation:photoFloat 5s ease-in-out infinite;
 }
@@ -265,7 +322,7 @@ p{
   height:100%;
   overflow:hidden;
   border-radius:17px;
-  background:#15151b;
+  background:#eee5d9;
 }
 
 .photo-inner img{
@@ -284,8 +341,7 @@ p{
   }
 }
 
-/* ---------- CAKE ---------- */
-
+/* CAKE */
 .cake-area{
   height:270px;
   display:flex;
@@ -298,7 +354,7 @@ p{
   position:relative;
   width:190px;
   height:125px;
-  filter:drop-shadow(0 25px 30px rgba(0,0,0,.6));
+  filter:drop-shadow(0 25px 30px rgba(80,60,40,.22));
 }
 
 .cake-base{
@@ -308,11 +364,14 @@ p{
   height:90px;
   border-radius:18px 18px 25px 25px;
   background:linear-gradient(
-    90deg,#633447,#c27791,#69374b
+    90deg,
+    #b99372,
+    #f0dfca,
+    #b48d6c
   );
   box-shadow:
-    inset 0 8px 12px rgba(255,255,255,.16),
-    inset 0 -15px 20px rgba(0,0,0,.25);
+    inset 0 8px 12px rgba(255,255,255,.6),
+    inset 0 -15px 20px rgba(90,65,40,.15);
 }
 
 .cake-top{
@@ -322,7 +381,10 @@ p{
   height:43px;
   border-radius:50%;
   background:linear-gradient(
-    120deg,#ffdce7,#fff2f6,#c98ca2
+    120deg,
+    #fff,
+    #f9eee1,
+    #d9bfa0
   );
 }
 
@@ -337,7 +399,7 @@ p{
   background:repeating-linear-gradient(
     -45deg,
     #fff 0 7px,
-    #d78ba2 7px 14px
+    #c9a97f 7px 14px
   );
   z-index:2;
 }
@@ -352,9 +414,9 @@ p{
   border-radius:50%;
   background:radial-gradient(
     ellipse at bottom,
-    #fff5aa 0 20%,
-    #ffc34d 35%,
-    #ff704d 70%,
+    #fff 0 20%,
+    #e7b85f 35%,
+    #c9824d 70%,
     transparent 72%
   );
   animation:flicker .55s ease-in-out infinite alternate;
@@ -369,27 +431,26 @@ p{
   }
 }
 
-/* ---------- FINAL ---------- */
-
+/* FINAL */
 .final-box{
   padding:40px 25px;
-  border:1px solid rgba(255,255,255,.1);
+  border:1px solid rgba(130,105,75,.18);
   border-radius:30px;
-  background:rgba(255,255,255,.04);
+  background:rgba(255,255,255,.65);
   backdrop-filter:blur(18px);
-  box-shadow:0 30px 80px rgba(0,0,0,.5);
+  box-shadow:
+    0 30px 80px rgba(80,60,40,.18),
+    inset 0 1px 0 rgba(255,255,255,.9);
 }
 
 .final-heart{
   font-size:50px;
+  color:#a88b69;
   margin-bottom:20px;
   animation:float 3s ease-in-out infinite;
 }
 
-/* ---------- MOBILE ---------- */
-
 @media(max-width:600px){
-
   .orb{
     width:130px;
     height:130px;
@@ -412,6 +473,20 @@ p{
 
 <body>
 
+<!-- FLOATING DECOR -->
+<div class="decor">
+  <div class="star">✦</div>
+  <div class="star">✧</div>
+  <div class="star">✦</div>
+  <div class="star">✧</div>
+
+  <div class="gem"></div>
+  <div class="gem"></div>
+
+  <div class="choco"></div>
+  <div class="choco"></div>
+</div>
+
 <!-- PASSWORD -->
 <div id="lock">
 
@@ -421,7 +496,9 @@ p{
 
     <h1>A little secret...</h1>
 
-    <p>Only someone special knows the password.</p>
+    <p>
+      A tiny surprise is waiting for you.
+    </p>
 
     <input
       id="password"
@@ -447,15 +524,20 @@ p{
 
   <div class="content">
 
-    <div class="eyebrow">A tiny surprise</div>
+    <div class="eyebrow">
+      A tiny surprise
+    </div>
 
     <div class="orb"></div>
 
-    <h2>A little surprise<br>for you...</h2>
+    <h2>
+      A little surprise<br>
+      for you...
+    </h2>
 
     <p>
       Take a moment.<br>
-      Something is waiting for you.
+      Something special is waiting for you.
     </p>
 
     <button class="next-btn" onclick="nextPage()">
@@ -472,11 +554,17 @@ p{
 
   <div class="content">
 
-    <div class="spark">✦</div>
+    <div class="spark">
+      ✦
+    </div>
 
-    <div class="eyebrow">Made with lots of love</div>
+    <div class="eyebrow">
+      Made just for you
+    </div>
 
-    <h1 class="gradient-title">For My Babe</h1>
+    <h1 class="gradient-title">
+      For My Babe
+    </h1>
 
     <p>
       For all the random laughs,<br>
@@ -497,7 +585,9 @@ p{
 
   <div class="content">
 
-    <div class="eyebrow">One special memory</div>
+    <div class="eyebrow">
+      One special memory
+    </div>
 
     <div class="photo-frame">
 
@@ -532,7 +622,9 @@ p{
 
   <div class="content">
 
-    <div class="eyebrow">Birthday time</div>
+    <div class="eyebrow">
+      Birthday time
+    </div>
 
     <div class="cake-area">
 
@@ -550,7 +642,9 @@ p{
 
     </div>
 
-    <h2>Make a wish ✨</h2>
+    <h2>
+      Make a wish ✨
+    </h2>
 
     <p>
       Another year.<br>
@@ -573,9 +667,13 @@ p{
 
     <div class="final-box">
 
-      <div class="final-heart">♡</div>
+      <div class="final-heart">
+        ♡
+      </div>
 
-      <div class="eyebrow">For you, Harshini</div>
+      <div class="eyebrow">
+        For you, Harshini
+      </div>
 
       <h2>
         Happy Birthday,<br>
@@ -586,8 +684,8 @@ p{
         I hope this year gives you<br>
         countless reasons to smile,<br>
         beautiful memories to keep,<br>
-        and plenty of crazy moments to laugh about.<br><br>
-
+        and plenty of crazy moments to laugh about.
+        <br><br>
         Stay happy, stay crazy,<br>
         and keep being the amazing friend you are. ♡
       </p>
@@ -606,6 +704,7 @@ let unlocked = false;
 
 const pages = document.querySelectorAll(".page");
 
+
 function unlock(){
 
   const password =
@@ -618,23 +717,25 @@ function unlock(){
 
     unlocked = true;
 
-    document.getElementById("lock").style.display="none";
+    document.getElementById("lock").style.display = "none";
 
     showPage(0);
 
   }else{
 
-    error.textContent="Wrong password. Try again ♡";
+    error.textContent =
+      "Wrong password. Try again ♡";
 
   }
 
 }
 
+
 function showPage(index){
 
-  if(!unlocked) return;
+  if(!unlocked)return;
 
-  if(index < 0 || index >= pages.length) return;
+  if(index < 0 || index >= pages.length)return;
 
   pages.forEach((page,i)=>{
 
@@ -649,6 +750,7 @@ function showPage(index){
 
 }
 
+
 function nextPage(){
 
   if(currentPage < pages.length - 1){
@@ -660,7 +762,7 @@ function nextPage(){
 }
 
 
-/* Enter key = unlock */
+/* ENTER KEY */
 
 document
   .getElementById("password")
@@ -675,10 +777,11 @@ document
   });
 
 
-/* Swipe left/right */
+/* SWIPE */
 
 let startX = 0;
 let startY = 0;
+
 
 document.addEventListener(
   "touchstart",
@@ -694,11 +797,12 @@ document.addEventListener(
   {passive:true}
 );
 
+
 document.addEventListener(
   "touchend",
   (event)=>{
 
-    if(!unlocked) return;
+    if(!unlocked)return;
 
     const endX =
       event.changedTouches[0].screenX;
@@ -706,8 +810,11 @@ document.addEventListener(
     const endY =
       event.changedTouches[0].screenY;
 
-    const diffX = endX - startX;
-    const diffY = endY - startY;
+    const diffX =
+      endX - startX;
+
+    const diffY =
+      endY - startY;
 
     if(
       Math.abs(diffX) > 60 &&
